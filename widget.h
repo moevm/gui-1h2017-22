@@ -3,6 +3,19 @@
 
 #include <QWidget>
 
+#include <QWidget>
+#include <QTimer>
+#include <QResizeEvent>
+#include <QColor>
+#include <QColorDialog>
+#include <QString>
+#include "toolsbar.h"
+#include "paintscene.h"
+#include <QResizeEvent>
+#include <QFileDialog>
+#include <QXmlStreamReader>
+#include <QtXml/QtXml>
+#include <QtGui>
 namespace Ui {
 class Widget;
 }
@@ -13,15 +26,39 @@ class Widget : public QWidget
 
 public:
     explicit Widget(QWidget *parent = 0);
+    void resizeEvent(QResizeEvent *event);
+    void parseXML(const QDomNode xmlNode);
     ~Widget();
 
-private slots:
-    void on_Button1_clicked();
 
-     void on_pushButton_4_clicked();
+private slots:
+
+     void selectColor();
+
+     void savePic();
+
+     void on_btnStart_clicked();
+
+     void on_btnMenu_clicked();
+
+     void on_btnRepeat_clicked();
+
+     void on_btnFinish_clicked();
+
+     void on_btnSavePic_clicked();
+
+
+
+
 
 private:
-    Ui::Widget *ui;
+     Ui::Widget *ui;
+     toolsbar *tool;
+     QMap<QString, QMap<QString, QList<QString>* >* > *levels;
+     int current_level;
+     PaintScene *scene;
+     void loadLevel();
+     int getResult();
 };
 
 #endif // WIDGET_H
